@@ -300,42 +300,29 @@ svg.drawline path{stroke:var(--fg); stroke-width:1; fill:none; stroke-dasharray:
 .tag{font-family:'JetBrains Mono'; font-size:11.5px; padding:6px 11px; border:1px solid rgba(255,255,255,.55); color:#fff; background:rgba(255,255,255,.12); border-radius:6px;}
 
 /* CERTS */
-.cert-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; perspective:1400px;}
+.cert-grid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px; perspective:1400px;}
 @media(max-width:900px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:520px){.cert-grid{grid-template-columns:1fr;}}
 .cert-card{
   background:linear-gradient(155deg, color-mix(in srgb, var(--card-a) 82%, transparent), color-mix(in srgb, var(--card-b) 82%, transparent));
   border:1px solid var(--line);
-  padding:14px; text-align:left; cursor:zoom-in; position:relative; overflow:hidden;
+  padding:22px 16px; min-height:250px; text-align:left; position:relative; overflow:hidden;
   transition:transform .25s ease, box-shadow .35s ease, border-color .35s ease; transform-style:preserve-3d; will-change:transform; animation:certFloat 6s ease-in-out infinite;
 }
 .cert-card::after{content:''; position:absolute; top:14px; right:14px; width:34px; height:34px; border:1px solid var(--cert-accent, var(--acc1)); border-radius:50%; opacity:.8;}
 .cert-card::before{content:attr(data-mark); position:absolute; top:22px; right:25px; z-index:2; color:var(--cert-accent, var(--acc1)); font:700 10px 'JetBrains Mono';}
-.cert-card:nth-child(1){--cert-accent:#ffb84d}.cert-card:nth-child(2){--cert-accent:#55d6ff}.cert-card:nth-child(3){--cert-accent:#f04fbe}.cert-card:nth-child(4){--cert-accent:#8ee36b}
+.cert-card:nth-child(1){--cert-accent:#ffb84d}.cert-card:nth-child(2){--cert-accent:#55d6ff}.cert-card:nth-child(3){--cert-accent:#f04fbe}.cert-card:nth-child(4){--cert-accent:#8ee36b}.cert-card:nth-child(5){--cert-accent:#ff9f43}
 .cert-card:nth-child(2){animation-delay:-1.2s}.cert-card:nth-child(3){animation-delay:-2.4s}.cert-card:nth-child(4){animation-delay:-3.6s}.cert-card:nth-child(5){animation-delay:-4.8s}
 .cert-card:hover{box-shadow:0 35px 70px -20px rgba(0,0,0,.65), 0 0 0 1px color-mix(in srgb, var(--acc2) 65%, transparent); animation-play-state:paused;}
 @keyframes certFloat{0%,100%{transform:translateY(0) rotateX(0deg) rotateY(0deg)}50%{transform:translateY(-6px) rotateX(.8deg) rotateY(-.8deg)}}
-.cert-media{position:relative; aspect-ratio:1.42; overflow:hidden; background:#fff; border:1px solid var(--line);}
-.cert-media::before{content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(115deg, transparent 25%, rgba(255,255,255,.45) 48%, transparent 68%); transform:translateX(-130%); transition:transform .7s ease;}
-.cert-media::after{content:'OPEN FULL CERTIFICATE ↗'; position:absolute; inset:auto 10px 10px; z-index:2; padding:8px 10px; color:#fff; background:rgba(0,0,0,.72); font:10px 'JetBrains Mono'; letter-spacing:1px; opacity:0; transform:translateY(8px); transition:opacity .25s ease, transform .25s ease;}
-.cert-card:hover .cert-media::before{transform:translateX(130%);}
-.cert-card:hover .cert-media::after{opacity:1; transform:translateY(0);}
-.cert-media img,.cert-media iframe{width:100%; height:100%; display:block; border:0; object-fit:cover; pointer-events:none;}
-.cert-media iframe{background:#fff;}
-.cert-meta{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:16px 2px 3px;}
+.cert-meta{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:22px 2px 3px;}
 .cert-card .num{font-family:'Anton'; font-size:24px; -webkit-text-stroke:1px var(--acc2); color:transparent; line-height:1;}
-.cert-card h4{font-size:14px; margin-bottom:6px; line-height:1.3;}
+.cert-card h4{font-size:13px; margin-bottom:6px; line-height:1.3;}
 .cert-card span{font-size:10px; color:var(--mut); font-family:'JetBrains Mono';}
 .cert-status{display:flex; align-items:center; gap:6px; margin-top:12px; color:var(--cert-accent, var(--acc1)); font:10px 'JetBrains Mono'; letter-spacing:1px;}
 .cert-status i{width:6px; height:6px; display:inline-block; border-radius:50%; background:currentColor; box-shadow:0 0 10px currentColor;}
 .cert-code{display:block; margin-top:7px; color:var(--mut); font:9px 'JetBrains Mono'; letter-spacing:.6px;}
-.cert-modal{position:fixed; inset:0; z-index:1500; display:grid; place-items:center; padding:32px; background:rgba(3,6,15,.86); backdrop-filter:blur(14px); opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease;}
-.cert-modal.open{opacity:1; visibility:visible;}
-.cert-modal-content{position:relative; width:min(980px,100%); height:min(82vh,720px); background:#fff; border:1px solid var(--acc1); box-shadow:0 30px 100px rgba(0,0,0,.55); transform:translateY(20px) scale(.97); transition:transform .35s cubic-bezier(.2,.8,.2,1);}
-.cert-modal.open .cert-modal-content{transform:translateY(0) scale(1);}
-.cert-modal-content iframe,.cert-modal-content img{width:100%; height:100%; display:block; border:0; object-fit:contain; background:#fff;}
-.cert-close{position:absolute; right:-15px; top:-15px; width:34px; height:34px; border:1px solid var(--acc1); border-radius:50%; background:var(--bg); color:var(--fg); font:18px 'JetBrains Mono'; cursor:pointer; z-index:2;}
-@media(max-width:600px){.cert-modal{padding:16px;}.cert-modal-content{height:76vh;}.cert-close{right:-5px; top:-14px;}}
+.cert-detail{margin-top:16px; max-width:240px; color:var(--mut); font-size:11px; line-height:1.55;}
 @media(prefers-reduced-motion:reduce){.cert-card{animation:none;}}
 
 /* MARQUEE */
@@ -426,7 +413,7 @@ footer b{background:var(--grad); -webkit-background-clip:text; background-clip:t
       <div>
         <div class="stat-row">
           <div class="stat"><b>05+</b><span>PROJECTS</span></div>
-          <div class="stat"><b>04</b><span>CERTIFICATIONS</span></div>
+          <div class="stat"><b>05</b><span>CERTIFICATIONS</span></div>
           <div class="stat"><b>03</b><span>LANGUAGES</span></div>
         </div>
         <div class="stat-row">
@@ -526,13 +513,6 @@ footer b{background:var(--grad); -webkit-background-clip:text; background-clip:t
     </div>
   </div>
 </section>
-
-<div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-label="Certificate preview">
-  <div class="cert-modal-content">
-    <button class="cert-close" id="certClose" aria-label="Close certificate preview">×</button>
-    <div id="certModalBody"></div>
-  </div>
-</div>
 
 <footer>BUILT & DEPLOYED BY <b>AKSHAY PARMAR</b> · AHMEDABAD, GUJARAT · STATUS: ONLINE</footer>
 
@@ -901,37 +881,16 @@ projects.forEach(p=>{
 
 /* CERTS DATA */
 const certs=[
-  {n:'01', mark:'RH', h:'RHCSA', s:'RED HAT · MAR 2026', code:'ID 260-027-198', file:'ProfessionalCertificationDigitalCredentials20260307-31-jjlfgy.pdf', type:'pdf'},
-  {n:'02', mark:'AWS', h:'AWS Cloud Foundations', s:'AWS ACADEMY · AUG 2025', code:'CLOUD FOUNDATIONS', file:'AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260906-21-nm2k9q.pdf', type:'pdf'},
-  {n:'03', mark:'COM', h:'Getting Started with Compute', s:'AWS EDUCATE · AUG 2025', code:'COMPUTE PATHWAY', file:'aws-educate-getting-started-with-compute-training-b.png', type:'image'},
-  {n:'04', mark:'AWS', h:'AWS Solutions Architecture', s:'FORAGE × AWS · AUG 2025', code:'JOB SIMULATION', file:'kkE9HyeNcw6rwCRGw_pmnMSL4QiQ9JCgE3W_qBmpmwSKPJNGh2E4p_1754723265020_completion_certificate.pdf', type:'pdf'},
+  {n:'01', mark:'RH', h:'Red Hat Certified System Administrator', s:'RED HAT · ISSUED MAR 2026', code:'ID 260-027-198', detail:'RHCSA certification in Linux system administration.'},
+  {n:'02', mark:'AWS', h:'AWS Academy Graduate - Cloud Foundations', s:'AWS ACADEMY · ISSUED AUG 2025', code:'CLOUD FOUNDATIONS', detail:'Foundational cloud concepts and AWS services.'},
+  {n:'03', mark:'COM', h:'AWS Educate - Getting Started with Compute', s:'AWS EDUCATE · ISSUED AUG 2025', code:'COMPUTE PATHWAY', detail:'Core compute concepts and hands-on AWS learning.'},
+  {n:'04', mark:'ZET', h:'Certificate of Project Work Experience', s:'ZETHETA ALGORITHMS · 20 AUG 2026', code:'15 FULL TIME DAYS EQUIVALENT', detail:'Security Hardened Kubernetes Platform, completed as DevOps & Cloud Engineer.'},
+  {n:'05', mark:'AWS', h:'Solutions Architecture Job Simulation', s:'FORAGE · COMPLETED AUG 9, 2025', code:'USER CODE qBmpmwSKPJNGh2E4p', detail:'Designed a simple, scalable hosting architecture. Issued by Forage; enrolment code hSmLZaPYmNFtex3oE.'},
 ];
 const cg=document.getElementById('certGrid');
 certs.forEach(c=>{
-  const media=c.type==='image' ? `<img src="${c.file}" alt="${c.h} certificate" loading="lazy">` : `<iframe src="${c.file}#toolbar=0&navpanes=0&scrollbar=0" title="${c.h} certificate" loading="lazy"></iframe>`;
-  cg.innerHTML+=`<article class="cert-card" tabindex="0" data-mark="${c.mark}" data-file="${c.file}" data-type="${c.type}" data-title="${c.h}"><div class="cert-media">${media}</div><div class="cert-meta"><div><h4>${c.h}</h4><span>${c.s}</span><b class="cert-status"><i></i> VERIFIED CREDENTIAL</b><small class="cert-code">${c.code}</small></div><div class="num">${c.n}</div></div></article>`;
+  cg.innerHTML+=`<article class="cert-card" data-mark="${c.mark}"><div class="cert-meta"><div><h4>${c.h}</h4><span>${c.s}</span><b class="cert-status"><i></i> VERIFIED CREDENTIAL</b><small class="cert-code">${c.code}</small><p class="cert-detail">${c.detail}</p></div><div class="num">${c.n}</div></div></article>`;
 });
-
-const certModal=document.getElementById('certModal');
-const certModalBody=document.getElementById('certModalBody');
-const closeCert=()=>{ certModal.classList.remove('open'); certModalBody.innerHTML=''; document.body.style.overflow=''; };
-const openCert=card=>{
-  const file=card.dataset.file;
-  if(card.dataset.type==='pdf'){
-    window.open(file, '_blank', 'noopener');
-    return;
-  }
-  certModalBody.innerHTML=card.dataset.type==='image' ? `<img src="${file}" alt="${card.dataset.title} certificate">` : `<iframe src="${file}#toolbar=1&navpanes=0" title="${card.dataset.title} certificate"></iframe>`;
-  certModal.classList.add('open');
-  document.body.style.overflow='hidden';
-};
-document.querySelectorAll('.cert-card').forEach(card=>{
-  card.addEventListener('click',()=>openCert(card));
-  card.addEventListener('keydown',event=>{ if(event.key==='Enter' || event.key===' '){ event.preventDefault(); openCert(card); } });
-});
-document.getElementById('certClose').addEventListener('click',closeCert);
-certModal.addEventListener('click',event=>{ if(event.target===certModal) closeCert(); });
-document.addEventListener('keydown',event=>{ if(event.key==='Escape' && certModal.classList.contains('open')) closeCert(); });
 attachTilt('.cert-card', 12);
 
 /* SCROLL REVEAL + line draw */
